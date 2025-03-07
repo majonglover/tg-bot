@@ -13,7 +13,10 @@ logging.basicConfig(level=logging.INFO)
 
 # Используем default=DefaultBotProperties
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher(bot=bot)  # Передаем bot как именованный аргумент
+dp = Dispatcher()
+
+# Передаем bot через dp.setup()
+dp.setup(bot)
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -47,6 +50,11 @@ async def process_callback(callback_query: types.CallbackQuery):
     await callback_query.answer()
 
 async def main():
+    await dp.start_polling()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
     await dp.start_polling()
 
 if __name__ == "__main__":
