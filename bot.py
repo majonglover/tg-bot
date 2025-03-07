@@ -3,16 +3,15 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
-from aiogram.client.default import DefaultBotProperties
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
-ADMIN_ID = "@sava_il"
+ADMIN_ID = 123456789  # Замените на числовой ID администратора
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
 
-# Используем default=DefaultBotProperties
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+# Инициализируем бота с parse_mode
+bot = Bot(token=TOKEN, parse_mode="HTML")
 dp = Dispatcher()
 
 @dp.message(Command("start"))
@@ -38,8 +37,9 @@ async def process_callback(callback_query: types.CallbackQuery):
     user_id = int(user_id)
     
     if action == "approve":
-        invite_link = await bot.create_chat_invite_link(CHANNEL_ID, member_limit=1)
-        await bot.send_message(user_id, f"Ваша заявка одобрена! Вот ссылка на канал: {invite_link.invite_link}")
+        # Создаем инвайт-ссылку для канала
+        invite_link = await bot.export_chat_invite_link(CHANNEL_ID)
+        await bot.send_message(user_id, f"Ваша заявка одобрена! Вот ссылка на канал: {invite_link}")
         await callback_query.message.edit_text("Заявка одобрена ✅")
     elif action == "reject":
         await bot.send_message(user_id, "Ваша заявка отклонена.")
