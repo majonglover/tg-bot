@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.client.default import DefaultBotProperties
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
-ADMIN_ID = 123456789  # Замените на числовой ID администратора
+ADMIN_ID = "204910167"  # Замените на числовой ID администратора
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
