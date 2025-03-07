@@ -5,7 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
-ADMIN_ID = 123456789  # Замените на числовой ID администратора
+ADMIN_ID = "204910157"  # Замените на числовой ID администратора
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
