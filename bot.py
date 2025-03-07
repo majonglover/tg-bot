@@ -4,8 +4,8 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 
-TOKEN = 7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY
-ADMIN_ID = @sava_il
+TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
+ADMIN_ID = "@sava_il"
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
