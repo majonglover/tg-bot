@@ -12,8 +12,8 @@ logging.basicConfig(level=logging.INFO)
 
 from aiogram.client.default import DefaultBotProperties
 
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher()
+bot = Bot(token=TOKEN, parse_mode="HTML")  # Убираем лишний импорт DefaultBotProperties
+dp = Dispatcher(bot)  # Теперь передаем bot в Dispatcher
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -47,7 +47,7 @@ async def process_callback(callback_query: types.CallbackQuery):
     await callback_query.answer()
 
 async def main():
-    await dp.start_polling(bot)
+    await dp.start_polling()
 
 if __name__ == "__main__":
     asyncio.run(main())
