@@ -4,6 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.client.default import DefaultBotProperties
+from aiogram import F
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
 ADMIN_ID = "2125587179"  # Замените на числовой ID администратора
@@ -11,9 +12,11 @@ CHANNEL_ID = "@tradelovers101"
 
 logging.basicConfig(level=logging.INFO)
 
-# Используем DefaultBotProperties для задания parse_mode
+# Создаем объект бота
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher(bot)  # Передаем bot в Dispatcher
+
+# Dispatcher создаем через функцию
+dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -49,8 +52,8 @@ async def process_callback(callback_query: types.CallbackQuery):
     await callback_query.answer()
 
 async def main():
-    # Начинаем polling
-    await dp.start_polling()
+    # Начинаем polling с диспетчером и ботом
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())  # Вызываем main через asyncio
