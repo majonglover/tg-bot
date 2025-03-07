@@ -24,8 +24,9 @@ async def receive_application(message: types.Message):
     user = message.from_user
     text = f"Заявка от @{user.username} (ID: {user.id}):\n{message.text}"
     
-    approve_button = InlineKeyboardButton("✅ Заебись", callback_data=f"approve_{user.id}")
-    reject_button = InlineKeyboardButton("❌ Хуета", callback_data=f"reject_{user.id}")
+    # Применяем правильный синтаксис для InlineKeyboardButton
+    approve_button = InlineKeyboardButton(text="✅ Заебись", callback_data=f"approve_{user.id}")
+    reject_button = InlineKeyboardButton(text="❌ Хуета", callback_data=f"reject_{user.id}")
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[approve_button, reject_button]])
     
     await bot.send_message(ADMIN_ID, text, reply_markup=keyboard)
