@@ -3,15 +3,16 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
+from aiogram.client.default import DefaultBotProperties
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
-ADMIN_ID = "204910157"  # Замените на числовой ID администратора
+ADMIN_ID = 123456789  # Замените на числовой ID администратора
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
 
-# Инициализируем бота с parse_mode
-bot = Bot(token=TOKEN, parse_mode="HTML")
+# Используем DefaultBotProperties для задания parse_mode
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
 @dp.message(Command("start"))
