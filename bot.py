@@ -3,15 +3,17 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
+from aiogram.client.default import DefaultBotProperties
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
-ADMIN_ID = 2125587179  # Замените на числовой ID администратора
+ADMIN_ID = "2125587179"  # Замените на числовой ID администратора
 CHANNEL_ID = "@tradelovers101"  
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
+# Используем DefaultBotProperties для задания parse_mode
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+dp = Dispatcher(bot)  # Передаем bot в Dispatcher
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -27,7 +29,7 @@ async def receive_application(message: types.Message):
     reject_button = InlineKeyboardButton(text="❌ Хуета", callback_data=f"reject_{user.id}")
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[approve_button, reject_button]])
     
-    await bot.send_message(ADMIN_ID, text, reply_markup=keyboard, parse_mode="HTML")
+    await bot.send_message(ADMIN_ID, text, reply_markup=keyboard)
     await message.answer("Ваша заявка отправлена администратору.")
 
 @dp.callback_query()
@@ -52,4 +54,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())  # Вызываем main через asyncio
+
 
