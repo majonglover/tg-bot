@@ -3,6 +3,7 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
+from aiogram.client.default import DefaultBotProperties
 
 TOKEN = "7625252064:AAHTu2HlifuD0DqAsW1dn4NfhFwaMFpqeHY"
 ADMIN_ID = "@sava_il"
@@ -10,10 +11,9 @@ CHANNEL_ID = "@tradelovers101"
 
 logging.basicConfig(level=logging.INFO)
 
-from aiogram.client.default import DefaultBotProperties
-
-bot = Bot(token=TOKEN, parse_mode="HTML")  # Убираем лишний импорт DefaultBotProperties
-dp = Dispatcher(bot)  # Теперь передаем bot в Dispatcher
+# Используем default=DefaultBotProperties
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+dp = Dispatcher(bot)  # Передаем bot в Dispatcher
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -51,4 +51,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
