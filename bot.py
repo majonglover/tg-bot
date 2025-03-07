@@ -15,9 +15,6 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
-# Передаем bot через dp.setup()
-dp.setup(bot)
-
 @dp.message(Command("start"))
 async def start(message: types.Message):
     await message.answer("Привет! Добро пожаловать, меня зовут Сава и я эксперт по трейдингу. Оставь заявку на вступление, пиши- хочу в канал, принимаю 24/7:")
@@ -50,12 +47,8 @@ async def process_callback(callback_query: types.CallbackQuery):
     await callback_query.answer()
 
 async def main():
-    await dp.start_polling()
+    # Начинаем polling
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
-    await dp.start_polling()
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())  # Вызываем main через asyncio
