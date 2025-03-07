@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Используем default=DefaultBotProperties
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher(bot)  # Передаем bot в Dispatcher
+dp = Dispatcher(bot=bot)  # Передаем bot как именованный аргумент
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -51,5 +51,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
